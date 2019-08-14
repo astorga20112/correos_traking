@@ -23,32 +23,7 @@ $(document).ready(function() {
             });
         },
         complete: function(data) {
-            $('#results > tbody  > tr').each(function() {
-                code = $(this).find("#code").text();
-                var $this = $(this);
-                $.ajax({
-                    dataType: "json",
-                    url: "https://fabianvillena.cl/correos/" + code,
-                    success: function(data) {
-                        state = data['registros'][0]['estado'];
-                        place = data['registros'][0]['lugar'];
-                        date = data['registros'][0]['fecha'];
-                        $this.find("#state").html(state)
-                        $this.find("#place").html(place)
-                        $this.find("#date").html(date)
-                    },
-                    complete: function() {},
-                    error: function() {
-                        $this.find("#state").html('error')
-                        $this.find("#place").html('error')
-                        $this.find("#date").html('error')
-                    },
-    
-                    async: true,
-                });
-                
-            });
-            $("#results").dataTable({
+            var results_table = $("#results").DataTable({
                 "aaSorting": [0, 'desc'],
                 "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
                             if ( aData[4] == "SUCURSAL LA CISTERNA" || aData[3] == "ENVIO ENTREGADO" )
@@ -60,6 +35,39 @@ $(document).ready(function() {
         
                         }
             });
+            $('#results > tbody  > tr').each(function() {
+                code = $(this).find("#code").text();
+                var $this = $(this);
+                $.ajax({
+                    dataType: "json",
+                    url: "api.php?code=" + code,
+                    success: function(data) {
+                        if (data['historial'].length > 0) {
+                            state = data['historial'][0]['Estado'];
+                            place = data['historial'][0]['Oficina'];
+                            date = data['historial'][0]['Fecha'];
+                            $this.find("#state").html(state)
+                            $this.find("#place").html(place)
+                            $this.find("#date").html(date)
+                        } else {
+                            $this.find("#state").html('error')
+                            $this.find("#place").html('error')
+                            $this.find("#date").html('error')
+                        }
+                        
+                    },
+                    complete: function() {
+                        results_table.draw();
+                    },
+                    error: function() {
+                        
+                    },
+    
+                    async: true,
+                });
+                
+            });
+            
         },
         async: true,
     });
