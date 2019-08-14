@@ -24,6 +24,7 @@ $(document).ready(function() {
         },
         complete: function(data) {
             var results_table = $("#results").DataTable({
+                "paging":false,
                 "aaSorting": [0, 'desc'],
                 "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
                             if ( aData[4] == "SUCURSAL LA CISTERNA" || aData[3] == "ENVIO ENTREGADO" )
@@ -46,13 +47,13 @@ $(document).ready(function() {
                             state = data['historial'][0]['Estado'];
                             place = data['historial'][0]['Oficina'];
                             date = data['historial'][0]['Fecha'];
-                            $this.find("#state").html(state)
-                            $this.find("#place").html(place)
-                            $this.find("#date").html(date)
+                            results_table.cell($this.find("#state")).data(state)
+                            results_table.cell($this.find("#place")).data(place)
+                            results_table.cell($this.find("#date")).data(date)
                         } else {
-                            $this.find("#state").html('error')
-                            $this.find("#place").html('error')
-                            $this.find("#date").html('error')
+                            results_table.cell($this.find("#state")).data('error')
+                            results_table.cell($this.find("#place")).data('error')
+                            results_table.cell($this.find("#date")).data('error')
                         }
                         
                     },
