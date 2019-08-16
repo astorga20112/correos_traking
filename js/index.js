@@ -17,7 +17,7 @@ $(document).ready(function() {
 
             $.each(codes, function(index, value) {
 
-                $("#results").append("<tr  id='result'>" + "<td  id='days'>" + days[index] + "</td>" + "<td  id='code'>" 	+ "<a target='_blank' href='https://www.correos.cl/SitePages/seguimiento/seguimiento.aspx?envio=" + value + "' >"  + value + "</a>" + "</td>" + "<td  id='item'>" + items[index] + "</td>" + "<td id='state'>" + 'loading' + "</td>" + "<td  id='place'>" + 'loading' + "</td>" + "<td  id='date'>" + 'loading' + "</td>" + "</tr>")
+                $("#results").append("<tr  id='result'>" + "<td  id='days'>" + days[index] + "</td>" + "<td  id='code'>" 	+ value + "</td>" + "<td  id='item'>" + items[index] + "</td>" + "<td id='state'>" + 'loading' + "</td>" +  "<td  id='date'>" + 'loading' + "</td>" + "<td  id='date'>" + '<div class="btn-group" role="group"><a target=_blank href=https://t.17track.net/es#nums='+value+' type="button" class="btn btn-primary"><i class="fas fa-globe-americas"></i></a><a target=_blank href=https://seguimientoenvio.correos.cl/home/index/'+value+' type="button" class="btn btn-primary"><i class="fas fa-home"></i></a></div>' + "</td>" + "</tr>")
 
 
             });
@@ -27,11 +27,9 @@ $(document).ready(function() {
                 "paging":false,
                 "aaSorting": [0, 'desc'],
                 "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-                            if ( aData[4] == "SUCURSAL LA CISTERNA" || aData[3] == "ENVIO ENTREGADO" )
+                            if ( aData[3].includes("ENVIO ENTREGADO") || aData[3].includes("SUCURSAL LA CISTERNA"))
                             {
-                                $('td', nRow).css('background-color', '#8DFF9A');
-                                $('td', nRow).addClass("pickUp");
-                                $('td', nRow).removeClass("inTransit");
+                                $('td', nRow).addClass("table-success");
                             }
         
                         }
@@ -47,12 +45,10 @@ $(document).ready(function() {
                             state = data['historial'][0]['Estado'];
                             place = data['historial'][0]['Oficina'];
                             date = data['historial'][0]['Fecha'];
-                            results_table.cell($this.find("#state")).data(state)
-                            results_table.cell($this.find("#place")).data(place)
+                            results_table.cell($this.find("#state")).data(state+"<br>"+'<small class="text-muted">'+place + '</small>')
                             results_table.cell($this.find("#date")).data(date)
                         } else {
                             results_table.cell($this.find("#state")).data('error')
-                            results_table.cell($this.find("#place")).data('error')
                             results_table.cell($this.find("#date")).data('error')
                         }
                         
