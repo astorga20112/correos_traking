@@ -29,7 +29,7 @@ $(document).ready(function() {
                 "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
                             if ( aData[3].includes("ENVIO ENTREGADO") || aData[3].includes("SUCURSAL LA CISTERNA"))
                             {
-                                $('td', nRow).addClass("table-success");
+                                $(nRow).addClass("table-success");
                             }
         
                         }
