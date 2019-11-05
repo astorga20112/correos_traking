@@ -59,13 +59,14 @@ $(document).ready(function() {
                     dataType: "json",
                     url: "api.php?code=" + code,
                     success: function(data) {
-                        if (data['historial'].length > 0) {
-                            state = data['historial'][0]['Estado'];
-                            place = data['historial'][0]['Oficina'];
-                            date = data['historial'][0]['Fecha'];
+                        console.log(data)
+                        if (data['error'] == false) {
+                            state = data['seguimiento']['historial'][0]['Estado'];
+                            place = data['seguimiento']['historial'][0]['Oficina'];
+                            date = data['seguimiento']['historial'][0]['Fecha'];
                             results_table.cell($this.find("#state")).data(state+"<br>"+'<small class="text-muted">'+place + '</small>')
                             results_table.cell($this.find("#date")).data(date)
-                            tracking_codes[data['Codigo']]['log'] = data['historial']
+                            tracking_codes[data['seguimiento']['MainCodigo']]['log'] = data['seguimiento']['historial']
                         } else {
                             results_table.cell($this.find("#state")).data('error')
                             results_table.cell($this.find("#date")).data('error')
