@@ -32,7 +32,7 @@ $(document).ready(function() {
                         <td  id='date'>
                             <div class='btn-group' role='group'>
                                 <a target=_blank href=https://t.17track.net/es#nums=`+value+` type='button' class='btn btn-primary'><i class='fas fa-globe-americas'></i></a>
-                                <a target=_blank href=https://seguimientoenvio.correos.cl/home/index/`+value+` type='button' class='btn btn-primary'><i class='fas fa-home'></i></a>
+                                <a target=_blank href=https://www.correos.cl/web/guest/seguimiento-en-linea?codigos=`+value+` type='button' class='btn btn-primary'><i class='fas fa-home'></i></a>
                                 <button value=`+value+` type='button' class='btn btn-info' onclick='moreinfo(this.value)'><i class='fas fa-search'></i></button>
                             </div>
                         </td>
