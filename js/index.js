@@ -9,7 +9,7 @@ $(document).ready(function() {
         success: function(data) {
 
             for (var i = 0; i < data.length; i++) {
-                if (data[i]["Estado"] != "Recibido" && data[i]["Codigo de Seguimiento"].length != 0) {
+                if (data[i]["Estado"] == "En Tránsito" && data[i]["Codigo de Seguimiento"].length != 0) {
                     codes.push(data[i]["Codigo de Seguimiento"]);
                     items.push(data[i]["Item"]);
                     days.push(data[i]["Demora"]);
