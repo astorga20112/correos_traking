@@ -66,7 +66,7 @@ $(document).ready(function() {
                             date = data['seguimiento']['historial'][0]['Fecha'];
                             results_table.cell($this.find("#state")).data(state+"<br>"+'<small class="text-muted">'+place + '</small>')
                             results_table.cell($this.find("#date")).data(date)
-                            tracking_codes[data['seguimiento']['MainCodigo']]['log'] = data['seguimiento']['historial']
+                            tracking_codes[code]['log'] = data['seguimiento']['historial']
                         } else {
                             results_table.cell($this.find("#state")).data('error')
                             results_table.cell($this.find("#date")).data('error')
