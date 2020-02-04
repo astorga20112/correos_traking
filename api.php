@@ -23,5 +23,6 @@ $result = str_replace("\\\"","\"",$result);
 
 header('Content-Type: application/json');
 $data = json_decode($result, true);
+$data["queriedNumber"] = $code;
 echo json_encode($data);
 ?>
